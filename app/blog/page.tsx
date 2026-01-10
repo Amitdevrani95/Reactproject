@@ -310,9 +310,11 @@ const ProfessionalBlogPage = () => {
                                 src={blog.image} 
                                 alt={blog.title} 
                                 className="relative w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-700" 
-                                onError={(e) => {
-                                  e.target.src = 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800';
-                                }}
+                               onError={(e) => {
+                            const img = e.currentTarget as HTMLImageElement;
+                          img.src = 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800';
+                          }}
+
                               />
                               {/* Minimal Overlay */}
                               <div className={`absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
