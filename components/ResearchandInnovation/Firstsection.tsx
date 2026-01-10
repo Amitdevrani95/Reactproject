@@ -15,7 +15,7 @@ const PowerStructureResearch = () => {
       icon: <Radio className="w-5 h-5" />,
       content: (
         <div className="space-y-4">
-          <p>Gonzaga University's Transmission and Distribution Engineering Department trains power utility engineers for the future of the electrical grid.</p>
+          <p>Gonzagaa University's Transmission and Distribution Engineering Department trains power utility engineers for the future of the electrical grid.</p>
           <p>You will tackle real-world challenges and gain knowledge about emerging trends, as you learn from our expert faculty, who are working engineers and industry leaders at top utilities and engineering firms around the United States.</p>
           <p>We offer two online choices: a <strong>Master of Engineering in Transmission and Distribution Engineering</strong> and a <strong>Certificate in Transmission and Distribution Engineering</strong>.</p>
           <p>Both are designed for electric utility engineers and can help electrical, mechanical and civil engineers reach their goals in the power industry.</p>
