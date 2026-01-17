@@ -1,3 +1,4 @@
+
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 
@@ -376,8 +377,8 @@ const EngineeringTabsSlider = () => {
                     </div>
                   </div>
 
-                  {/* Content Section - Bottom Half */}
-                  <div className="relative h-2/5 p-6 sm:p-8 flex flex-col justify-between bg-[#0a0e1a]">
+                  {/* Content Section - Bottom Half - HOVER EFFECT HERE */}
+                  <div className="relative h-2/5 p-6 sm:p-8 flex flex-col justify-between bg-[#0a0e1a] group-hover:bg-[#CD091B] transition-all duration-500">
                     
                     {/* Title */}
                     <div>
@@ -387,18 +388,18 @@ const EngineeringTabsSlider = () => {
                       />
                       
                       {/* Decorative Line */}
-                      <div className="h-1 w-16 bg-[#CD091B] rounded-full mb-4"></div>
+                      <div className="h-1 w-16 bg-[#CD091B] group-hover:bg-white rounded-full mb-4 transition-all duration-500"></div>
                     </div>
                     
-                    {/* Button */}
+                    {/* Button - HOVER EFFECT HERE */}
                     <a 
                       href={item.url} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-between w-full bg-[#CD091B] hover:bg-[#a5070f] text-white font-semibold text-sm sm:text-base py-4 px-6 rounded-xl border border-[#CD091B] hover:border-[#a5070f] transition-all duration-300 group/btn shadow-lg hover:shadow-xl"
+                      className="inline-flex items-center justify-between w-full bg-[#CD091B] group-hover:bg-white text-white group-hover:text-[#CD091B] font-semibold text-sm sm:text-base py-4 px-6 rounded-xl border border-[#CD091B] group-hover:border-white transition-all duration-500 shadow-lg hover:shadow-xl"
                     >
                       <span className="tracking-wide">View Details</span>
-                      <svg className="w-5 h-5 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                       </svg>
                     </a>
@@ -467,7 +468,6 @@ const PowerStructureSVG = () => (
       <circle cx="150" cy="50" r="5" fill="#ef4444"/>
       <circle cx="300" cy="50" r="5" fill="#ef4444"/>
     </svg>
-
     {/* Transformer - Bottom Left */}
     <svg className="absolute bottom-1/4 left-12 sm:left-16 md:left-24 w-20 h-24 sm:w-24 sm:h-28 md:w-28 md:h-32 lg:w-36 lg:h-40 opacity-[0.04]" viewBox="0 0 150 180" fill="none">
       <rect x="40" y="60" width="70" height="100" stroke="#3b82f6" strokeWidth="4" fill="none" rx="5"/>
