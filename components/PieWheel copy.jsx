@@ -1,10 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const sections = [
   {
-    tabTitle: "Systems Approach",
+    tabTitle: "Systems and Approach",
     contentTitle: "Systems Approach and Foresight",
     image: "https://sanpec-excellence.com/wp-content/uploads/2025/02/Rectangle-3-copy-8-3.png",
     content: [
@@ -51,7 +51,7 @@ const sections = [
     link: "/sanpec-six-pillars/#agility"
   },
   {
-    tabTitle: "Innovation",
+    tabTitle: "New Innovation",
     contentTitle: "New Solutions and Innovation Management",
     image: "https://sanpec-excellence.com/wp-content/uploads/2025/01/Rectangle-3-copy-10.png",
     content: [
@@ -74,7 +74,7 @@ const sections = [
     link: "/sanpec-six-pillars/#e-n-tab-title-843412763"
   },
   {
-    tabTitle: "Process",
+    tabTitle: "Process Excellence",
     contentTitle: "Process Excellence",
     image: "https://sanpec-excellence.com/wp-content/uploads/2025/01/Rectangle-3-copy-11.png",
     content: [
@@ -102,7 +102,7 @@ const sections = [
     link: "/sanpec-six-pillars/#e-n-tab-title-843412764"
   },
   {
-    tabTitle: "Ecosystem",
+    tabTitle: "Ecosystem Innovation",
     contentTitle: "Innovation within the Business Ecosystem",
     image: "https://sanpec-excellence.com/wp-content/uploads/2025/01/Rectangle-3-copy-2-2-2.png",
     content: [
@@ -126,7 +126,7 @@ const sections = [
     link: "/sanpec-six-pillars/#e-n-tab-title-843412765"
   },
   {
-    tabTitle: "Co-Creation",
+    tabTitle: "Collaboration & Co-Creation",
     contentTitle: "Collaborative Efforts for Shared Value",
     image: "https://sanpec-excellence.com/wp-content/uploads/2025/01/Rectangle-3-copy-3-4.png",
     content: [
@@ -149,6 +149,29 @@ const sections = [
 
 export default function InteractivePieWheel() {
   const [currentActiveIndex, setCurrentActiveIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  
+  // Colors - Only 2 colors as requested
+  const primaryColor = "#101631";
+  const secondaryColor = "#CD091B";
+
+  // Detect mobile screen
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    
+    // Initial check
+    checkMobile();
+    
+    // Add event listener
+    window.addEventListener('resize', checkMobile);
+    
+    // Cleanup
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const totalSlices = sections.length;
   const anglePerSlice = 360 / totalSlices;
 
@@ -166,320 +189,427 @@ export default function InteractivePieWheel() {
   };
 
   const selectSlice = (i) => {
+    if (isAnimating || i === currentActiveIndex) return;
+    
+    setIsAnimating(true);
     setCurrentActiveIndex(i);
+    
+    setTimeout(() => setIsAnimating(false), 600);
   };
 
   const nextSlice = () => {
-    setCurrentActiveIndex((prev) => (prev + 1) % totalSlices);
+    selectSlice((currentActiveIndex + 1) % totalSlices);
   };
 
   const previousSlice = () => {
-    setCurrentActiveIndex((prev) => (prev - 1 + totalSlices) % totalSlices);
+    selectSlice((currentActiveIndex - 1 + totalSlices) % totalSlices);
   };
 
-  const rotation = 180 - (currentActiveIndex * anglePerSlice + anglePerSlice / 2);
+  const rotation = 90 - (currentActiveIndex * anglePerSlice + anglePerSlice / 2);
+
+  // Safe check for current section
+  const currentSection = sections[currentActiveIndex] || sections[0];
 
   return (
-    <div className="font-sans min-h-screen relative overflow-hidden">
-      {/* Background with Power Elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white via-gray-100 to-gray-200 z-0">
-        {/* Grid Pattern */}
-        <div 
-          className="absolute inset-0 opacity-50"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(200, 200, 200, 0.3) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(200, 200, 200, 0.3) 1px, transparent 1px)
-            `,
-            backgroundSize: '40px 40px'
-          }}
-        />
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+      {/* Background SVG Elements - Power Structure Related */}
+      {!isMobile && (
+        <div className="absolute inset-0 z-0 opacity-10">
+          {/* Transmission Tower 1 */}
+          <svg className="absolute top-10 left-20 w-40 h-40" viewBox="0 0 100 100">
+            <path d="M50 10 L55 40 L45 40 Z" fill={primaryColor} />
+            <rect x="48" y="40" width="4" height="50" fill={primaryColor} />
+            <path d="M30 90 L70 90 L65 80 L35 80 Z" fill={primaryColor} />
+            <line x1="40" y1="60" x2="60" y2="60" stroke={primaryColor} strokeWidth="1" />
+            <line x1="45" y1="70" x2="55" y2="70" stroke={primaryColor} strokeWidth="1" />
+          </svg>
+          
+          {/* Transmission Tower 2 */}
+          <svg className="absolute bottom-32 right-32 w-32 h-32" viewBox="0 0 100 100">
+            <path d="M50 15 L60 45 L40 45 Z" fill={secondaryColor} />
+            <rect x="48" y="45" width="4" height="45" fill={secondaryColor} />
+            <path d="M35 90 L65 90 L60 80 L40 80 Z" fill={secondaryColor} />
+            <line x1="42" y1="60" x2="58" y2="60" stroke={secondaryColor} strokeWidth="1" />
+            <line x1="45" y1="70" x2="55" y2="70" stroke={secondaryColor} strokeWidth="1" />
+          </svg>
+          
+          {/* Electrical Circuit */}
+          <svg className="absolute top-1/3 left-1/4 w-48 h-48" viewBox="0 0 100 100">
+            <rect x="20" y="20" width="60" height="60" rx="10" fill="none" stroke={primaryColor} strokeWidth="2" strokeDasharray="5,5" />
+            <circle cx="35" cy="35" r="8" fill="none" stroke={primaryColor} strokeWidth="2" />
+            <circle cx="65" cy="65" r="8" fill="none" stroke={primaryColor} strokeWidth="2" />
+            <path d="M35 35 L45 45 L55 35 L65 45" stroke={secondaryColor} strokeWidth="2" fill="none" />
+            <circle cx="50" cy="50" r="3" fill={secondaryColor} />
+          </svg>
+          
+          {/* Power Lines */}
+          <svg className="absolute bottom-20 left-1/3 w-64 h-24" viewBox="0 0 200 40">
+            <line x1="10" y1="20" x2="190" y2="20" stroke={primaryColor} strokeWidth="2" strokeDasharray="10,5" />
+            <circle cx="40" cy="20" r="4" fill={secondaryColor} />
+            <circle cx="80" cy="20" r="4" fill={secondaryColor} />
+            <circle cx="120" cy="20" r="4" fill={secondaryColor} />
+            <circle cx="160" cy="20" r="4" fill={secondaryColor} />
+          </svg>
+          
+          {/* Bolt Icons */}
+          <svg className="absolute top-44 right-44 w-20 h-20" viewBox="0 0 100 100">
+            <path d="M60 10 L40 50 L55 50 L35 90 L65 50 L50 50 Z" fill={secondaryColor} opacity="0.6" />
+          </svg>
+          
+          <svg className="absolute bottom-44 left-44 w-16 h-16" viewBox="0 0 100 100">
+            <path d="M55 15 L40 40 L50 40 L35 75 L60 40 L50 40 Z" fill={primaryColor} opacity="0.6" />
+          </svg>
+          
+          {/* Gear Icon */}
+          <svg className="absolute top-1/4 right-1/4 w-28 h-28" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="30" fill="none" stroke={primaryColor} strokeWidth="3" />
+            <circle cx="50" cy="50" r="10" fill="none" stroke={primaryColor} strokeWidth="3" />
+            {[...Array(8)].map((_, i) => {
+              const angle = (i * 45) * Math.PI / 180;
+              const x1 = 50 + 30 * Math.cos(angle);
+              const y1 = 50 + 30 * Math.sin(angle);
+              const x2 = 50 + 20 * Math.cos(angle);
+              const y2 = 50 + 20 * Math.sin(angle);
+              return (
+                <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke={primaryColor} strokeWidth="3" />
+              );
+            })}
+          </svg>
+        </div>
+      )}
 
-        {/* Transmission Tower - Left */}
-        <svg className="absolute top-[150px] left-[30px] w-[180px] h-[280px] opacity-[0.05]" viewBox="0 0 100 180">
-          <path d="M50 5 L35 30 L25 30 L30 50 L20 50 L40 170 L43 170 L43 120 L57 120 L57 170 L60 170 L80 50 L70 50 L75 30 L65 30 Z" fill="#2c3e50" />
-          <line x1="25" y1="30" x2="75" y2="30" stroke="#cd091b" strokeWidth="1.5" />
-          <line x1="20" y1="50" x2="80" y2="50" stroke="#cd091b" strokeWidth="1.5" />
-          <line x1="30" y1="80" x2="70" y2="80" stroke="#cd091b" strokeWidth="1.5" />
-          <line x1="35" y1="30" x2="65" y2="30" stroke="#1a476d" strokeWidth="2" />
-          <line x1="30" y1="50" x2="70" y2="50" stroke="#1a476d" strokeWidth="2" />
-        </svg>
-
-        {/* Utility Pole - Top Right */}
-        <svg className="absolute top-[100px] right-[50px] w-[120px] h-[220px] opacity-[0.06]" viewBox="0 0 80 140">
-          <rect x="36" y="20" width="8" height="120" fill="#8B4513" rx="1" />
-          <rect x="10" y="35" width="60" height="4" fill="#654321" rx="1" />
-          <rect x="15" y="55" width="50" height="4" fill="#654321" rx="1" />
-          <circle cx="15" cy="37" r="3" fill="#003f87" />
-          <circle cx="40" cy="37" r="3" fill="#003f87" />
-          <circle cx="65" cy="37" r="3" fill="#003f87" />
-          <line x1="15" y1="40" x2="15" y2="140" stroke="#cd091b" strokeWidth="1" />
-          <line x1="40" y1="40" x2="40" y2="140" stroke="#cd091b" strokeWidth="1" />
-          <line x1="65" y1="40" x2="65" y2="140" stroke="#cd091b" strokeWidth="1" />
-        </svg>
-
-        {/* Transmission Tower - Bottom Left */}
-        <svg className="absolute bottom-[80px] left-[80px] w-[140px] h-[200px] opacity-[0.05]" viewBox="0 0 100 150">
-          <path d="M50 5 L40 25 L32 25 L45 140 L55 140 L68 25 L60 25 Z" fill="#2c3e50" />
-          <line x1="32" y1="25" x2="68" y2="25" stroke="#cd091b" strokeWidth="1.5" />
-          <line x1="35" y1="45" x2="65" y2="45" stroke="#cd091b" strokeWidth="1.5" />
-          <line x1="38" y1="70" x2="62" y2="70" stroke="#cd091b" strokeWidth="1.5" />
-        </svg>
-
-        {/* Power Lines */}
-        <svg className="absolute top-[200px] left-0 w-full h-[3px] opacity-[0.08]">
-          <line x1="0" y1="1" x2="100%" y2="1.5" stroke="#cd091b" strokeWidth="2" strokeDasharray="15,8" />
-        </svg>
+      {/* Main Container - Responsive padding for mobile */}
+      <div className="px-4 lg:px-[70px] py-8 lg:py-12 max-w-[1800px] mx-auto relative z-10">
         
-        <svg className="absolute bottom-[250px] left-0 w-full h-[3px] opacity-[0.08]">
-          <line x1="0" y1="1.5" x2="100%" y2="1" stroke="#cd091b" strokeWidth="2" strokeDasharray="15,8" />
-        </svg>
-
-        {/* Small Poles - Right */}
-        <svg className="absolute bottom-[120px] right-[100px] w-[100px] h-[160px] opacity-[0.06]" viewBox="0 0 60 100">
-          <rect x="27" y="10" width="6" height="90" fill="#8B4513" rx="1" />
-          <rect x="8" y="25" width="44" height="3" fill="#654321" rx="1" />
-          <line x1="10" y1="28" x2="10" y2="100" stroke="#cd091b" strokeWidth="0.8" />
-          <line x1="30" y1="28" x2="30" y2="100" stroke="#cd091b" strokeWidth="0.8" />
-          <line x1="50" y1="28" x2="50" y2="100" stroke="#cd091b" strokeWidth="0.8" />
-        </svg>
-      </div>
-
-      {/* Content Container */}
-      <div className="relative z-10 py-[60px] px-5">
-        
-        {/* Header Section */}
-        <div className="text-center mb-20 relative p-[50px_20px] bg-gradient-to-b from-white/90 to-gray-100/80 border-t-[5px] border-t-[#003f87] border-b-[5px] border-b-[#cd091b] shadow-[0_10px_40px_rgba(0,0,0,0.08)]">
-          {/* Decorative Red Stripes - Top */}
-          <div 
-            className="absolute top-0 left-0 right-0 h-10 opacity-15"
-            style={{
-              background: 'repeating-linear-gradient(0deg, #cd091b 0px, #cd091b 5px, transparent 5px, transparent 10px)'
-            }}
-          />
-
-          {/* Star Pattern */}
-          <div className="absolute top-5 left-10 w-[120px] h-20 bg-[#003f87] opacity-[0.08]">
-            <div 
-              className="absolute inset-0"
-              style={{
-                backgroundImage: 'radial-gradient(circle, white 2px, transparent 2px)',
-                backgroundSize: '20px 20px',
-                backgroundPosition: '0 0, 10px 10px'
-              }}
-            />
-          </div>
-
-          {/* Electric Border Top */}
-          <div 
-            className="w-4/5 max-w-[800px] h-1 mx-auto mb-[30px] rounded-[2px]"
-            style={{
-              background: 'linear-gradient(90deg, transparent, #cd091b 20%, #003f87 50%, #cd091b 80%, transparent)',
-              boxShadow: '0 0 15px rgba(205, 9, 27, 0.3)'
-            }}
-          />
-
-          {/* Watermark */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[140px] font-black text-black/[0.02] tracking-[20px] pointer-events-none whitespace-nowrap">
-            POWER
-          </div>
-
-          {/* Power Icon */}
-          <div className="inline-flex items-center justify-center w-[90px] h-[90px] bg-gradient-to-br from-[#cd091b] to-[#003f87] rounded-full mb-[25px] shadow-[0_8px_30px_rgba(205,9,27,0.4),inset_0_2px_10px_rgba(255,255,255,0.2)] border-4 border-white relative">
-            <div className="absolute inset-[8px] border-2 border-white/30 rounded-full" />
-            <svg width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round">
-              <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" />
-            </svg>
-          </div>
-
-          {/* Main Title */}
-          <h1 className="text-[56px] font-black text-[#003f87] m-0 mb-[10px] tracking-[4px] uppercase leading-[1.2]"
-              style={{ textShadow: '2px 2px 0px rgba(205, 9, 27, 0.1), -1px -1px 0px rgba(255, 255, 255, 0.5)' }}>
-            SANPEC'S <span className="text-[#cd091b]">SIX PILLARS</span><br />
-            <span 
-              className="bg-clip-text text-transparent"
-              style={{
-                background: 'linear-gradient(90deg, #003f87 0%, #cd091b 50%, #003f87 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent'
-              }}
-            >
-              OF EXCELLENCE
-            </span>
-          </h1>
-
-          {/* Decorative Line */}
-          <div className="flex items-center justify-center gap-[15px] my-5 mx-auto">
-            <div className="w-[60px] h-[3px] bg-[#cd091b] rounded-[2px]" />
-            <div className="w-2 h-2 bg-[#003f87] rounded-full shadow-[0_0_10px_rgba(0,63,135,0.5)]" />
-            <div className="w-[120px] h-[3px] bg-[#003f87] rounded-[2px]" />
-            <div className="w-2 h-2 bg-[#cd091b] rounded-full shadow-[0_0_10px_rgba(205,9,27,0.5)]" />
-            <div className="w-[60px] h-[3px] bg-[#cd091b] rounded-[2px]" />
-          </div>
-
-          {/* Subtitle Box */}
-          <div className="max-w-[1000px] mx-auto p-[30px_45px] bg-white border-[3px] border-[#003f87] rounded-[15px] shadow-[0_8px_32px_rgba(0,63,135,0.15),inset_0_2px_0_rgba(255,255,255,0.8)] relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-[#cd091b] to-transparent opacity-15" />
-            <div className="absolute bottom-0 left-0 w-20 h-20 bg-gradient-to-tr from-[#cd091b] to-transparent opacity-15" />
+        {/* Attractive Section Title - Responsive for mobile */}
+        <div className="text-center mb-8 lg:mb-16 relative">
+          {/* Decorative Elements - Hide on mobile */}
+          {!isMobile && (
+            <div className="absolute top-0 left-0 w-full flex justify-center">
+              <div className="flex items-center gap-3">
+                <div className="w-20 h-1 bg-gradient-to-r from-transparent via-gray-300 to-transparent rounded-full"></div>
+                <div className="w-3 h-3 rounded-full animate-pulse" style={{ backgroundColor: secondaryColor }}></div>
+                <div className="w-20 h-1 bg-gradient-to-l from-transparent via-gray-300 to-transparent rounded-full"></div>
+              </div>
+            </div>
+          )}
+          
+          {/* Main Title - Responsive text sizes */}
+          <div className="relative inline-block mt-6 lg:mt-10 mb-4 lg:mb-6">
+            {/* Background Glow - Hide on mobile */}
+            {!isMobile && (
+              <div className="absolute -inset-4 bg-gradient-to-r from-secondaryColor/10 to-primaryColor/10 blur-xl rounded-2xl"></div>
+            )}
             
-            <p className="text-lg text-[#2c3e50] m-0 leading-[1.8] font-normal relative z-10">
-              <span className="text-[#cd091b] font-bold text-xl inline-block mr-2">
-                ⚡ Powering the Future
-              </span>
-              — Unwavering commitment to excellence, resilience, and sustainability. SANPEC has set new benchmarks and led the power transmission industry forward in these critical areas.
-            </p>
+            <h1 className="relative text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mb-2 lg:mb-4 tracking-tight">
+              <span style={{ color: primaryColor }}>SANPEC'S</span>{' '}
+              <span style={{ color: secondaryColor }}>SIX PILLARS</span>
+            </h1>
+            
+            <h2 className="relative text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-4 lg:mb-6" style={{ color: primaryColor }}>
+              OF EXCELLENCE
+            </h2>
+            
+            {/* Title Decorative Line - Smaller on mobile */}
+            <div className="relative h-1 w-32 lg:w-48 mx-auto rounded-full overflow-hidden">
+              <div className="absolute inset-0" style={{ 
+                background: `linear-gradient(90deg, ${primaryColor}30, ${secondaryColor}, ${primaryColor}30)` 
+              }}></div>
+            </div>
           </div>
-
-          {/* Electric Border Bottom */}
-          <div 
-            className="w-4/5 max-w-[800px] h-1 mx-auto mt-[30px] rounded-[2px]"
-            style={{
-              background: 'linear-gradient(90deg, transparent, #003f87 20%, #cd091b 50%, #003f87 80%, transparent)',
-              boxShadow: '0 0 15px rgba(0, 63, 135, 0.3)'
-            }}
-          />
-
-          {/* Decorative Red Stripes - Bottom */}
-          <div 
-            className="absolute bottom-0 left-0 right-0 h-10 opacity-15"
-            style={{
-              background: 'repeating-linear-gradient(0deg, #cd091b 0px, #cd091b 5px, transparent 5px, transparent 10px)'
-            }}
-          />
+          
+          {/* Description - Simplified on mobile */}
+          <div className="max-w-4xl mx-auto mt-6 lg:mt-10">
+            <div className="relative bg-white border border-gray-200 rounded-xl lg:rounded-2xl p-4 lg:p-8 shadow-md lg:shadow-lg hover:shadow-lg lg:hover:shadow-xl transition-shadow duration-300">
+              {!isMobile && (
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                  <div className="w-6 h-6 rotate-45 bg-white border-t border-l border-gray-200"></div>
+                </div>
+              )}
+              
+              <div className="flex items-start gap-3 lg:gap-4">
+                <div className="flex-shrink-0">
+                  <div className="w-10 h-10 lg:w-14 lg:h-14 rounded-full flex items-center justify-center shadow-md lg:shadow-lg" 
+                       style={{ backgroundColor: secondaryColor }}>
+                    <svg className="w-5 h-5 lg:w-7 lg:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </div>
+                </div>
+                
+                <div className="text-left">
+                  <h3 className="text-lg lg:text-xl font-bold mb-1 lg:mb-2" style={{ color: secondaryColor }}>
+                    Powering the Future
+                  </h3>
+                  <p className="text-gray-700 text-sm lg:text-lg leading-relaxed">
+                    Unwavering commitment to excellence, resilience, and sustainability. SANPEC has set new benchmarks and led the power transmission industry forward in these critical areas.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Main Content Area */}
-        <div className="flex gap-[60px] max-w-[1500px] mx-auto items-start flex-wrap justify-center">
+        {/* Main Content Area - Mobile: Stack vertically, Desktop: Side by side */}
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start">
           
-          {/* Wheel Container */}
-          <div className="relative w-[550px] h-[550px] min-w-[550px]" style={{ filter: 'drop-shadow(0 0 30px rgba(205, 9, 27, 0.3))' }}>
-            <div 
-              className="w-full h-full rounded-full bg-gradient-to-br from-white to-gray-100 border-[6px] border-[#cd091b] overflow-hidden transition-transform duration-[600ms] ease-in-out"
-              style={{
-                boxShadow: '0 0 0 4px #1a476d, 0 0 60px rgba(205, 9, 27, 0.4), inset 0 0 30px rgba(205, 9, 27, 0.05)',
-                transform: `rotate(${rotation}deg)`
-              }}
-            >
-              <svg viewBox="0 0 500 500" className="w-full h-full -rotate-90">
-                {sections.map((sec, i) => (
-                  <path
-                    key={i}
-                    d={createSlicePath(i)}
-                    fill={i === currentActiveIndex ? '#cd091b' : '#f8f9fa'}
-                    stroke="#1a476d"
-                    strokeWidth="3"
-                    className="cursor-pointer transition-all duration-300"
-                    style={{ filter: i === currentActiveIndex ? 'drop-shadow(0 0 8px rgba(205, 9, 27, 0.6))' : 'none' }}
-                    onClick={() => selectSlice(i)}
-                  />
-                ))}
-              </svg>
-
-              {/* Labels */}
-              <div 
-                className="absolute inset-0 pointer-events-none transition-transform duration-[600ms] ease-in-out"
-                style={{ transform: `rotate(${rotation}deg)` }}
-              >
-                {sections.map((sec, i) => {
-                  const angle = i * anglePerSlice + anglePerSlice / 2;
-                  const r = 180;
-                  const left = 250 + r * Math.cos((angle - 90) * Math.PI / 180);
-                  const top = 250 + r * Math.sin((angle - 90) * Math.PI / 180);
-
-                  return (
-                    <div
-                      key={i}
-                      className="absolute w-[130px] text-center font-extrabold text-[15px]"
-                      style={{
-                        color: i === currentActiveIndex ? '#fff' : '#1a476d',
-                        left: `${left}px`,
-                        top: `${top}px`,
-                        transform: `translate(-50%, -50%) rotate(${angle + 270}deg)`,
-                        transformOrigin: 'center',
-                        textShadow: i === currentActiveIndex ? '0 2px 8px rgba(0,0,0,0.3)' : 'none'
-                      }}
-                    >
-                      {sec.tabTitle}
+          {/* Left - Pie Wheel with Outer Layer - Hide outer layer on mobile */}
+          <div className="w-full lg:w-1/2 flex justify-center hidden lg:flex">
+            <div className={`relative ${isMobile ? 'w-[300px] h-[300px]' : 'w-[600px] h-[600px]'}`}>
+              {/* Outer Static Layer with Text - Hide on mobile */}
+              {!isMobile && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-[580px] h-[580px] rounded-full border-2 flex items-center justify-center"
+                       style={{ borderColor: `${primaryColor}30` }}>
+                    {/* Top Text */}
+                    <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-6">
+                      <div className="px-6 py-3 rounded-full bg-white shadow-lg border border-gray-200">
+                        <span className="font-bold text-lg tracking-wide whitespace-nowrap" style={{ color: primaryColor }}>
+                          Bringing Engineering Excellence
+                        </span>
+                      </div>
                     </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Center Circle */}
-            <div className="absolute w-[200px] h-[200px] bg-gradient-to-br from-white to-gray-50 rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center z-[5] border-4 border-[#1a476d] shadow-[0_0_40px_rgba(205,9,27,0.3),inset_0_0_20px_rgba(205,9,27,0.05)]">
-              <div className="font-bold text-lg text-[#cd091b] text-center tracking-[1.5px]" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
-                DISCOVER<br />MORE
-              </div>
-              <div className="flex gap-[15px] mt-[15px]">
-                <div
-                  onClick={previousSlice}
-                  className="w-10 h-10 border-[3px] border-[#cd091b] rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 text-[22px] font-bold text-[#cd091b] shadow-[0_2px_8px_rgba(0,0,0,0.1)] hover:bg-[#cd091b] hover:text-white hover:scale-110"
-                >
-                  ‹
+                    
+                    {/* Bottom Text */}
+                    <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-6">
+                      <div className="px-6 py-3 rounded-full bg-white shadow-lg border border-gray-200">
+                        <span className="font-bold text-lg tracking-wide whitespace-nowrap" style={{ color: primaryColor }}>
+                          Improving Power Grid Reliability
+                        </span>
+                      </div>
+                    </div>
+                    
+                    {/* Middle Ring */}
+                    <div className="w-[520px] h-[520px] rounded-full border" style={{ 
+                      borderColor: `${primaryColor}20`,
+                    }}></div>
+                  </div>
                 </div>
-                <div
-                  onClick={nextSlice}
-                  className="w-10 h-10 border-[3px] border-[#cd091b] rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 text-[22px] font-bold text-[#cd091b] shadow-[0_2px_8px_rgba(0,0,0,0.1)] hover:bg-[#cd091b] hover:text-white hover:scale-110"
-                >
-                  ›
+              )}
+              
+              {/* Pie Wheel - Responsive size */}
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <div className={`relative ${isMobile ? 'w-[300px] h-[300px]' : 'w-[500px] h-[500px]'}`}>
+                  {/* Outer Ring - Smaller on mobile */}
+                  <div className={`absolute inset-0 rounded-full ${isMobile ? 'border-4' : 'border-8'}`} style={{ 
+                    borderColor: `${primaryColor}20`,
+                    boxShadow: `0 0 20px ${secondaryColor}10`
+                  }}></div>
+                  
+                  {/* Pie Wheel */}
+                  <div 
+                    className="w-full h-full rounded-full overflow-hidden transition-transform duration-700 ease-out"
+                    style={{ 
+                      transform: `rotate(${rotation}deg)`,
+                      boxShadow: isMobile ? '0 10px 30px rgba(0,0,0,0.1)' : '0 20px 60px rgba(0,0,0,0.15)'
+                    }}
+                  >
+                    <svg viewBox="0 0 500 500" className="w-full h-full">
+                      {sections.map((_, i) => (
+                        <path
+                          key={i}
+                          d={createSlicePath(i)}
+                          fill={i === currentActiveIndex ? secondaryColor : '#ffffff'}
+                          stroke={i === currentActiveIndex ? secondaryColor : '#e5e7eb'}
+                          strokeWidth="2"
+                          className="cursor-pointer transition-all duration-300 hover:opacity-90"
+                          onClick={() => selectSlice(i)}
+                        />
+                      ))}
+                    </svg>
+                    
+                    {/* Labels - Responsive positioning */}
+                    <div className="absolute inset-0 pointer-events-none">
+                      {sections.map((sec, i) => {
+                        const angle = i * anglePerSlice + anglePerSlice / 2;
+                        const r = isMobile ? 100 : 180;
+
+                        const x = 250 + r * Math.cos((angle - 90) * Math.PI / 180);
+                        const y = 250 + r * Math.sin((angle - 90) * Math.PI / 180);
+
+                        return (
+                          <div
+                            key={i}
+                            className="absolute text-center"
+                            style={{
+                              left: `${x}px`,
+                              top: `${y}px`,
+                              transform: `
+                                translate(-50%, -50%)
+                                rotate(${-rotation}deg)
+                              `,
+                              transformOrigin: 'center',
+                            }}
+                          >
+                            <div
+                              className={`
+                                px-3 py-2 rounded-lg transition-all duration-300
+                                ${i === currentActiveIndex
+                                  ? 'bg-secondaryColor text-white'
+                                  : 'text-gray-800'
+                                }
+                              `}
+                            >
+                              <span className={`font-bold ${isMobile ? 'text-xs' : 'text-sm'} tracking-wide leading-snug line-clamp-2`} style={{ maxWidth: isMobile ? '100px' : '130px' }}>
+                                {sec.tabTitle}
+                              </span>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                  
+                  {/* Center Controls - Responsive size */}
+                  <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${isMobile ? 'w-24 h-24' : 'w-40 h-40'}`}>
+                    <div className={`w-full h-full rounded-full bg-white border-4 shadow-xl flex flex-col items-center justify-center ${isMobile ? 'p-2' : 'p-4'}`}
+                         style={{ borderColor: primaryColor }}>
+                      <div className="text-center mb-2">
+                        <div className={`${isMobile ? 'text-xs' : 'text-sm'} font-bold uppercase tracking-widest`} style={{ color: primaryColor }}>
+                          SANPEC EXCELLENCE
+                        </div>
+                      </div>
+                      
+                      <div className="flex gap-2">
+                        <button
+                          onClick={previousSlice}
+                          className={`${isMobile ? 'w-8 h-8' : 'w-10 h-10'} rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg`}
+                          style={{ backgroundColor: primaryColor }}
+                          aria-label="Previous"
+                        >
+                          <svg className={`${isMobile ? 'w-4 h-4' : 'w-5 h-5'} text-white`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
+                          </svg>
+                        </button>
+                        <button
+                          onClick={nextSlice}
+                          className={`${isMobile ? 'w-8 h-8' : 'w-10 h-10'} rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg`}
+                          style={{ backgroundColor: secondaryColor }}
+                          aria-label="Next"
+                        >
+                          <svg className={`${isMobile ? 'w-4 h-4' : 'w-5 h-5'} text-white`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Content Panel - 2 Column Layout */}
-          <div className="flex-1 min-w-[400px] max-w-[750px]">
-            <div className="bg-white/98 rounded-[20px] p-0 shadow-[0_20px_60px_rgba(0,0,0,0.4),0_0_1px_1px_rgba(205,9,27,0.2)] border-2 border-[#cd091b]/20 overflow-hidden">
-              <div className="grid grid-cols-[280px_1fr] gap-0 min-h-[500px]">
-                {/* Left Column - Image */}
-                <div className="bg-gradient-to-br from-[#1a476d] to-[#0a1128] p-[30px] flex items-center justify-center relative border-r-[3px] border-r-[#cd091b]">
-                  <div className="absolute top-5 right-5 w-[50px] h-[50px] border-[3px] border-[#cd091b]/50 border-l-0 border-b-0 rounded-tr-lg" />
-                  
+          {/* Right - Content Panel - Full width on mobile */}
+          <div className="w-full lg:w-1/2">
+            <div className="bg-white rounded-xl lg:rounded-2xl shadow-lg lg:shadow-xl border border-gray-200 overflow-hidden h-auto lg:h-[600px]">
+              <div className="flex flex-col md:flex-row h-full">
+                {/* Image Section - Responsive height and object-cover on mobile */}
+                <div className="md:w-2/5 h-48 md:h-auto relative overflow-hidden">
                   <img
-                    src={sections[currentActiveIndex].image}
-                    alt={sections[currentActiveIndex].contentTitle}
-                    className="rounded-xl w-full h-auto shadow-[0_10px_30px_rgba(0,0,0,0.5)] border-2 border-white/10"
+                    src={currentSection.image}
+                    alt={currentSection.contentTitle}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                    onError={(e) => {
+                      e.target.src = "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9";
+                    }}
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
                 </div>
-
-                {/* Right Column - Content */}
-                <div className="p-[35px_40px] overflow-y-auto max-h-[600px]">
+                
+                {/* Content Section - Responsive padding */}
+                <div className="md:w-3/5 p-4 lg:p-8 overflow-y-auto">
                   {/* Title */}
-                  <div className="mb-[25px] pb-5 border-b-2 border-[#cd091b]/20">
-                    <h2 className="text-[28px] font-bold text-[#1a476d] mb-2 leading-[1.3]">
-                      {sections[currentActiveIndex].contentTitle}
+                  <div className="mb-4 lg:mb-6 pb-3 lg:pb-4 border-b" style={{ borderColor: `${primaryColor}20` }}>
+                    <h2 className={`${isMobile ? 'text-xl' : 'text-2xl md:text-3xl'} font-bold`} style={{ color: primaryColor }}>
+                      {currentSection.contentTitle}
                     </h2>
-                    <div className="w-[60px] h-[3px] bg-gradient-to-r from-[#cd091b] to-transparent rounded-[2px]" />
+                    <div className={`${isMobile ? 'w-16 h-1' : 'w-24 h-1.5'} rounded-full mt-2`} style={{ backgroundColor: secondaryColor }}></div>
                   </div>
                   
-                  {/* Content Text */}
-                  <div className="text-[14.5px] text-[#444] leading-[1.8] mb-[30px]">
-                    {sections[currentActiveIndex].content.map((item, idx) => (
-                      <p key={idx} className="mb-[14px]">
+                  {/* Content - Responsive text */}
+                  <div className="space-y-4 mb-6 pr-2">
+                    {currentSection.content.map((item, idx) => (
+                      <div key={idx} className="group hover:bg-gray-50 p-3 rounded-lg transition-all duration-300">
                         {item.subtitle && (
-                          <strong className="text-[#1a476d] block mb-1">
+                          <h3 className={`font-bold ${isMobile ? 'text-base' : 'text-lg'} mb-2 flex items-center gap-2`} style={{ color: primaryColor }}>
+                            <div className="w-2 h-2 rounded-full bg-secondaryColor opacity-0 group-hover:opacity-100 transition-opacity"></div>
                             {item.subtitle}
-                          </strong>
+                          </h3>
                         )}
-                        {item.text}
-                      </p>
+                        <p className={`text-gray-700 leading-relaxed ${isMobile ? 'text-sm' : 'text-sm md:text-base'}`}>
+                          {item.text}
+                        </p>
+                      </div>
                     ))}
                   </div>
-
-                  {/* Read More Button */}
+                  
+                  {/* CTA Button */}
                   <a 
-                    href={sections[currentActiveIndex].link}
-                    className="inline-flex items-center gap-[10px] px-8 py-[14px] bg-gradient-to-br from-[#cd091b] to-[#a00716] text-white no-underline rounded-[10px] font-bold text-sm transition-all duration-300 shadow-[0_4px_20px_rgba(205,9,27,0.4)] border-2 border-transparent hover:bg-gradient-to-br hover:from-[#a00716] hover:to-[#cd091b] hover:-translate-y-0.5 hover:shadow-[0_6px_25px_rgba(205,9,27,0.5)] hover:border-[#1a476d]"
+                    href={currentSection.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-3 px-4 lg:px-6 py-2 lg:py-3 rounded-lg lg:rounded-xl font-bold transition-all duration-300 hover:gap-4 hover:shadow-lg group text-sm lg:text-base"
+                    style={{ 
+                      backgroundColor: secondaryColor,
+                      color: 'white'
+                    }}
                   >
-                    READ MORE
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                      <path d="M5 12h14M12 5l7 7-7 7"/>
+                    <span>Read More</span>
+                    <svg className="w-4 h-4 lg:w-5 lg:h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>
                   </a>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+        
+        {/* Bottom Navigation Tabs - Responsive grid */}
+        <div className="mt-8 lg:mt-16">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 lg:gap-4">
+            {sections.map((section, index) => (
+              <button
+                key={index}
+                onClick={() => selectSlice(index)}
+                className={`
+                  relative p-3 lg:p-5 rounded-lg lg:rounded-xl transition-all duration-300 overflow-hidden group
+                  ${index === currentActiveIndex ? 'scale-105 shadow-lg lg:shadow-xl' : 'shadow-md lg:shadow-lg hover:scale-105'}
+                `}
+                style={{
+                  backgroundColor: index === currentActiveIndex ? secondaryColor : 'white',
+                  color: index === currentActiveIndex ? 'white' : primaryColor,
+                  border: `2px solid ${index === currentActiveIndex ? secondaryColor : '#e5e7eb'}`,
+                }}
+              >
+                {/* Hover Background */}
+                <div className="absolute inset-0 bg-gradient-to-r from-primaryColor/5 to-secondaryColor/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                
+                {/* Content */}
+                <div className="relative z-10">
+                  <div className="flex items-center justify-center mb-2 lg:mb-3">
+                    <div className={`
+                      ${isMobile ? 'w-8 h-8' : 'w-10 h-10'} rounded-full flex items-center justify-center transition-all duration-300
+                      ${index === currentActiveIndex 
+                        ? 'bg-white/20' 
+                        : 'bg-gray-100 group-hover:bg-secondaryColor/10'
+                      }
+                    `}>
+                      <svg className={`
+                        ${isMobile ? 'w-4 h-4' : 'w-5 h-5'} transition-colors duration-300
+                        ${index === currentActiveIndex ? 'text-white' : 'text-gray-500 group-hover:text-secondaryColor'}
+                      `} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                      </svg>
+                    </div>
+                  </div>
+                  
+                  <div className={`font-bold ${isMobile ? 'text-xs' : 'text-sm md:text-base'} leading-tight`}>
+                    {section.tabTitle}
+                  </div>
+                </div>
+              </button>
+            ))}
           </div>
         </div>
       </div>

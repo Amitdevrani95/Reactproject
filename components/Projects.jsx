@@ -31,8 +31,7 @@ const EngineeringTabsSlider = () => {
             id: post.id,
             title: post.title.rendered,
             category: categoryName,
-            img: post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || 
-                 "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9",
+            img: "/images/home/projectimage.png",
             url: post.link
           };
         });
@@ -45,8 +44,7 @@ const EngineeringTabsSlider = () => {
             id: post.id,
             title: post.title.rendered,
             category: categoryName,
-            img: post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || 
-                 "https://images.unsplash.com/photo-1532094349884-543bc11b234d",
+            img: "/images/home/projectimage.png",
             url: post.link
           };
         });
@@ -75,7 +73,7 @@ const EngineeringTabsSlider = () => {
     const container = scrollRef.current;
     if (!container) return;
     
-    const scrollAmount = window.innerWidth < 768 ? 280 : 800;
+    const scrollAmount = window.innerWidth < 768 ? 300 : 900;
     container.scrollTo({
       left: container.scrollLeft + (direction === 'left' ? -scrollAmount : scrollAmount),
       behavior: 'smooth'
@@ -99,89 +97,221 @@ const EngineeringTabsSlider = () => {
   const currentData = activeTab === "projects" ? projects : research;
 
   return (
-    <div className="relative w-full overflow-hidden py-8 sm:py-12 md:py-16 lg:py-20 min-h-screen bg-[#0a0e1a]">
-      {/* Grid Background */}
+    <div className="relative w-full overflow-hidden py-12 sm:py-16 md:py-20 lg:py-24 min-h-screen bg-[#101631]">
+      <PowerStructureSVG />
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0" style={{
           backgroundImage: `
-            linear-gradient(to right, rgba(59, 130, 246, 0.3) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(59, 130, 246, 0.3) 1px, transparent 1px)
+            linear-gradient(to right, rgba(59, 130, 246, 0.5) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(59, 130, 246, 0.5) 1px, transparent 1px)
           `,
-          backgroundSize: '40px 40px'
+          backgroundSize: '50px 50px'
+        }}></div>
+        {/* Animated grid lines */}
+        <div className="absolute inset-0 animate-pulse-slow" style={{
+          backgroundImage: `
+            linear-gradient(to right, rgba(239, 68, 68, 0.3) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(239, 68, 68, 0.3) 1px, transparent 1px)
+          `,
+          backgroundSize: '100px 100px',
+          backgroundPosition: '25px 25px'
         }}></div>
       </div>
 
-      <PowerStructureSVG />
+      {/* Title Section with Full Width Power Lines */}
+      <div className="relative z-10 text-center mb-10 sm:mb-12 md:mb-16 lg:mb-20 px-4">
+        {/* Full Width Animated Power Lines Background */}
+        <div className="absolute left-0 right-0 top-0 bottom-0 pointer-events-none" style={{ marginTop: '-40px', marginBottom: '-40px' }}>
+          <svg className="w-full h-full" viewBox="0 0 1400 200" preserveAspectRatio="none">
+            <defs>
+              {/* Gradient for electricity flow */}
+              <linearGradient id="electricFlow1" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#3b82f6" stopOpacity="0">
+                  <animate attributeName="offset" values="-0.3;1" dur="2.5s" repeatCount="indefinite" />
+                </stop>
+                <stop offset="30%" stopColor="#60a5fa" stopOpacity="1">
+                  <animate attributeName="offset" values="0;1.3" dur="2.5s" repeatCount="indefinite" />
+                </stop>
+                <stop offset="50%" stopColor="#93c5fd" stopOpacity="0.8">
+                  <animate attributeName="offset" values="0.2;1.5" dur="2.5s" repeatCount="indefinite" />
+                </stop>
+                <stop offset="100%" stopColor="#3b82f6" stopOpacity="0">
+                  <animate attributeName="offset" values="0.5;1.8" dur="2.5s" repeatCount="indefinite" />
+                </stop>
+              </linearGradient>
+              
+              <linearGradient id="electricFlow2" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#CD091B" stopOpacity="0">
+                  <animate attributeName="offset" values="-0.3;1" dur="3s" repeatCount="indefinite" />
+                </stop>
+                <stop offset="30%" stopColor="#ef4444" stopOpacity="1">
+                  <animate attributeName="offset" values="0;1.3" dur="3s" repeatCount="indefinite" />
+                </stop>
+                <stop offset="50%" stopColor="#f87171" stopOpacity="0.8">
+                  <animate attributeName="offset" values="0.2;1.5" dur="3s" repeatCount="indefinite" />
+                </stop>
+                <stop offset="100%" stopColor="#CD091B" stopOpacity="0">
+                  <animate attributeName="offset" values="0.5;1.8" dur="3s" repeatCount="indefinite" />
+                </stop>
+              </linearGradient>
 
-      {/* Title Section */}
-      <div className="relative z-10 text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16 px-4">
-        <div className="inline-block mb-4 sm:mb-6">
-          <div className="flex items-center gap-2 sm:gap-3 text-red-500 text-xs sm:text-sm md:text-base font-bold tracking-[0.2em] sm:tracking-[0.3em] mb-2 sm:mb-3">
-            <div className="w-8 sm:w-12 md:w-16 lg:w-24 h-px bg-gradient-to-r from-transparent via-red-500 to-red-500"></div>
+              <linearGradient id="electricFlow3" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#3b82f6" stopOpacity="0">
+                  <animate attributeName="offset" values="-0.3;1" dur="2.8s" repeatCount="indefinite" />
+                </stop>
+                <stop offset="30%" stopColor="#60a5fa" stopOpacity="1">
+                  <animate attributeName="offset" values="0;1.3" dur="2.8s" repeatCount="indefinite" />
+                </stop>
+                <stop offset="50%" stopColor="#93c5fd" stopOpacity="0.8">
+                  <animate attributeName="offset" values="0.2;1.5" dur="2.8s" repeatCount="indefinite" />
+                </stop>
+                <stop offset="100%" stopColor="#3b82f6" stopOpacity="0">
+                  <animate attributeName="offset" values="0.5;1.8" dur="2.8s" repeatCount="indefinite" />
+                </stop>
+              </linearGradient>
+
+              {/* Enhanced Glow Filter */}
+              <filter id="powerGlow">
+                <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                <feMerge>
+                  <feMergeNode in="coloredBlur"/>
+                  <feMergeNode in="coloredBlur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+            
+            {/* Left Tower/Pole */}
+            <g opacity="0.6">
+              <rect x="50" y="60" width="8" height="80" fill="#1e293b"/>
+              <line x1="20" y1="70" x2="85" y2="70" stroke="#1e293b" strokeWidth="4"/>
+              <circle cx="20" cy="80" r="5" fill="#3b82f6">
+                <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite" />
+              </circle>
+              <circle cx="54" cy="60" r="6" fill="#CD091B">
+                <animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" repeatCount="indefinite" />
+              </circle>
+              <circle cx="85" cy="80" r="5" fill="#3b82f6">
+                <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" begin="0.5s" repeatCount="indefinite" />
+              </circle>
+            </g>
+
+            {/* Right Tower/Pole */}
+            <g opacity="0.6">
+              <rect x="1342" y="60" width="8" height="80" fill="#1e293b"/>
+              <line x1="1315" y1="70" x2="1380" y2="70" stroke="#1e293b" strokeWidth="4"/>
+              <circle cx="1315" cy="80" r="5" fill="#3b82f6">
+                <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite" />
+              </circle>
+              <circle cx="1346" cy="60" r="6" fill="#CD091B">
+                <animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" begin="0.3s" repeatCount="indefinite" />
+              </circle>
+              <circle cx="1380" cy="80" r="5" fill="#3b82f6">
+                <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" begin="0.5s" repeatCount="indefinite" />
+              </circle>
+            </g>
+            
+            {/* Wire Lines with flowing electricity - Full Width */}
+            {/* Top wire */}
+            <path d="M 20,80 L 1380,80" stroke="#1e293b" strokeWidth="2" fill="none" opacity="0.4"/>
+            <path d="M 20,80 L 1380,80" stroke="url(#electricFlow1)" strokeWidth="4" fill="none" filter="url(#powerGlow)"/>
+            
+            {/* Middle wire */}
+            <path d="M 20,100 L 1380,100" stroke="#1e293b" strokeWidth="2" fill="none" opacity="0.4"/>
+            <path d="M 20,100 L 1380,100" stroke="url(#electricFlow2)" strokeWidth="4" fill="none" filter="url(#powerGlow)"/>
+            
+            {/* Bottom wire */}
+            <path d="M 20,120 L 1380,120" stroke="#1e293b" strokeWidth="2" fill="none" opacity="0.4"/>
+            <path d="M 20,120 L 1380,120" stroke="url(#electricFlow3)" strokeWidth="4" fill="none" filter="url(#powerGlow)"/>
+            
+            {/* Connection points along the wires */}
+            <circle cx="350" cy="80" r="4" fill="#3b82f6" opacity="0.7">
+              <animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="700" cy="80" r="4" fill="#3b82f6" opacity="0.7">
+              <animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" begin="0.8s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="1050" cy="80" r="4" fill="#3b82f6" opacity="0.7">
+              <animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" begin="1.6s" repeatCount="indefinite" />
+            </circle>
+            
+            <circle cx="450" cy="100" r="4" fill="#CD091B" opacity="0.7">
+              <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="700" cy="100" r="4" fill="#CD091B" opacity="0.7">
+              <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" begin="1s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="950" cy="100" r="4" fill="#CD091B" opacity="0.7">
+              <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" begin="2s" repeatCount="indefinite" />
+            </circle>
+            
+            <circle cx="280" cy="120" r="4" fill="#3b82f6" opacity="0.7">
+              <animate attributeName="opacity" values="0.3;1;0.3" dur="2.8s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="700" cy="120" r="4" fill="#3b82f6" opacity="0.7">
+              <animate attributeName="opacity" values="0.3;1;0.3" dur="2.8s" begin="0.9s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="1120" cy="120" r="4" fill="#3b82f6" opacity="0.7">
+              <animate attributeName="opacity" values="0.3;1;0.3" dur="2.8s" begin="1.8s" repeatCount="indefinite" />
+            </circle>
+          </svg>
+        </div>
+        
+        <div className="inline-block relative">
+          <div className="flex items-center gap-3 sm:gap-4 text-[#CD091B] text-sm sm:text-base md:text-lg font-bold tracking-widest mb-3 relative z-10">
+            <div className="w-12 sm:w-16 md:w-24 h-px bg-[#CD091B]"></div>
             <span className="whitespace-nowrap">ENGINEERING EXCELLENCE</span>
-            <div className="w-8 sm:w-12 md:w-16 lg:w-24 h-px bg-gradient-to-l from-transparent via-red-500 to-red-500"></div>
+            <div className="w-12 sm:w-16 md:w-24 h-px bg-[#CD091B]"></div>
           </div>
         </div>
       </div>
 
-      {/* Tabs - Sleek Modern Design */}
-      <div className="relative z-10 flex items-center justify-center mb-8 sm:mb-10 md:mb-12 lg:mb-16 px-4">
-        <div className=" relative inline-flex bg-white/20 backdrop-blur-sm p-1.5 sm:p-2 rounded-full border border-white/40 shadow-xl">
-          {/* Sliding background indicator */}
+      {/* Tabs */}
+      <div className="relative z-10 flex items-center justify-center mb-12 sm:mb-16 md:mb-20 px-4">
+        <div className="relative inline-flex bg-white p-2 rounded-full shadow-2xl">
           <div 
-            className={`absolute top-1.5 sm:top-2 bottom-1.5 sm:bottom-2 bg-gradient-to-r from-red-600 to-red-700 rounded-full transition-all duration-300 ease-out shadow-lg shadow-red-500/50 ${
-              activeTab === "projects" ? "left-1.5 sm:left-2" : "left-1/2"
+            className={`absolute top-2 bottom-2 bg-[#CD091B] rounded-full transition-all duration-300 ${
+              activeTab === "projects" ? "left-2" : "left-1/2"
             }`}
-            style={{ width: 'calc(50% - 0.375rem)' }}
+            style={{ width: 'calc(50% - 0.5rem)' }}
           ></div>
           
           <button
             onClick={() => setActiveTab("projects")}
-            className="relative z-10 px-6 sm:px-8 md:px-12 lg:px-16 py-3 sm:py-4 md:py-5 rounded-full transition-all duration-300"
+            className="relative z-10 px-8 sm:px-12 md:px-16 py-4 sm:py-5 rounded-full transition-all duration-300"
           >
-            <div className="flex items-center gap-2 sm:gap-3">
-              <svg className={`w-5 h-5 sm:w-6 sm:h-6 transition-all duration-300 ${activeTab === "projects" ? "text-white" : "text-slate-400"}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-              </svg>
-              <span className={`font-bold text-sm sm:text-base md:text-lg lg:text-xl uppercase tracking-wide transition-all duration-300 whitespace-nowrap ${
-                activeTab === "projects" ? "text-white" : "text-slate-400"
-              }`}>
-                Our Projects
-              </span>
-            </div>
+            <span className={`font-bold text-base sm:text-lg md:text-xl uppercase tracking-wide ${
+              activeTab === "projects" ? "text-white" : "text-slate-700"
+            }`}>
+              Our Projects
+            </span>
           </button>
 
           <button
             onClick={() => setActiveTab("research")}
-            className="relative z-10 px-6 sm:px-8 md:px-12 lg:px-16 py-3 sm:py-4 md:py-5 rounded-full transition-all duration-300"
+            className="relative z-10 px-8 sm:px-12 md:px-16 py-4 sm:py-5 rounded-full transition-all duration-300"
           >
-            <div className="flex items-center gap-2 sm:gap-3">
-              <svg className={`w-5 h-5 sm:w-6 sm:h-6 transition-all duration-300 ${activeTab === "research" ? "text-white" : "text-slate-400"}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-              </svg>
-              <span className={`font-bold text-sm sm:text-base md:text-lg lg:text-xl uppercase tracking-wide transition-all duration-300 whitespace-nowrap ${
-                activeTab === "research" ? "text-white" : "text-slate-400"
-              }`}>
-                Research & Innovation
-              </span>
-            </div>
+            <span className={`font-bold text-base sm:text-lg md:text-xl uppercase tracking-wide ${
+              activeTab === "research" ? "text-white" : "text-slate-700"
+            }`}>
+              Research & Innovation
+            </span>
           </button>
         </div>
       </div>
 
-      {/* Slider - Mobile Optimized */}
-      <div className="relative z-10 px-2 sm:px-4 md:px-8 lg:px-16">
-        {/* Arrows - Mobile Optimized */}
+      {/* Slider */}
+      <div className="relative z-10 px-4 sm:px-6 md:px-12 lg:px-20">
         <button
           onClick={() => scroll('left')}
           disabled={!canScrollLeft}
-          className={`absolute left-1 sm:left-2 md:left-4 top-1/2 -translate-y-1/2 z-20 transition-all ${
+          className={`absolute left-2 sm:left-4 md:left-6 top-1/2 -translate-y-1/2 z-20 transition-all ${
             canScrollLeft ? 'opacity-100' : 'opacity-0 pointer-events-none'
           }`}
         >
-          <div className="bg-gradient-to-br from-red-600 to-red-700 p-2 sm:p-3 md:p-4 lg:p-5 rounded-full border border-red-500 shadow-lg">
-            <svg className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-8 lg:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
+          <div className="bg-[#CD091B] p-4 sm:p-5 rounded-full shadow-2xl hover:scale-110 transition-transform">
+            <svg className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
             </svg>
           </div>
         </button>
@@ -189,70 +319,87 @@ const EngineeringTabsSlider = () => {
         <button
           onClick={() => scroll('right')}
           disabled={!canScrollRight}
-          className={`absolute right-1 sm:right-2 md:right-4 top-1/2 -translate-y-1/2 z-20 transition-all ${
+          className={`absolute right-2 sm:right-4 md:right-6 top-1/2 -translate-y-1/2 z-20 transition-all ${
             canScrollRight ? 'opacity-100' : 'opacity-0 pointer-events-none'
           }`}
         >
-          <div className="bg-gradient-to-br from-red-600 to-red-700 p-2 sm:p-3 md:p-4 lg:p-5 rounded-full border border-red-500 shadow-lg">
-            <svg className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-8 lg:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" />
+          <div className="bg-[#CD091B] p-4 sm:p-5 rounded-full shadow-2xl hover:scale-110 transition-transform">
+            <svg className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
             </svg>
           </div>
         </button>
 
-        {/* Loading State */}
         {loading ? (
-          <div className="flex gap-3 sm:gap-4 md:gap-6 lg:gap-8 overflow-hidden py-2 sm:py-4">
-            {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="flex-shrink-0 w-[260px] sm:w-[280px] md:w-[340px] lg:w-[380px] h-[360px] sm:h-[400px] md:h-[450px] lg:h-[500px] bg-slate-800/40 rounded-xl sm:rounded-2xl animate-pulse"></div>
+          <div className="flex gap-6 sm:gap-8 overflow-hidden py-4">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="flex-shrink-0 w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.33rem)] h-[450px] sm:h-[500px] bg-[#101631]/60 rounded-3xl animate-pulse border border-white/10"></div>
             ))}
           </div>
         ) : (
           <div
             ref={scrollRef}
-            className="flex gap-3 sm:gap-4 md:gap-6 lg:gap-8 overflow-x-auto scrollbar-hide scroll-smooth py-2 sm:py-4"
+            className="flex gap-6 sm:gap-8 md:gap-10 overflow-x-auto scrollbar-hide scroll-smooth py-4"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {currentData.map((item, index) => (
               <div
                 key={item.id}
-                className="relative flex-shrink-0 w-[260px] sm:w-[280px] md:w-[340px] lg:w-[380px] h-[360px] sm:h-[400px] md:h-[450px] lg:h-[500px]"
+                className="relative flex-shrink-0 w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.33rem)] h-[450px] sm:h-[500px] group"
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
-                <div className="absolute inset-0 rounded-xl sm:rounded-2xl border border-slate-700 hover:border-red-500 transition-all overflow-hidden shadow-xl">
-                  {/* Image with lazy loading */}
-                  <img
-                    src={item.img}
-                    alt={item.title}
-                    loading="lazy"
-                    className="h-full w-full object-cover"
-                    style={{ filter: 'brightness(0.75)' }}
-                  />
+                {/* Card Container */}
+                <div className="relative h-full rounded-3xl overflow-hidden bg-[#0f1729] border border-white/5 group-hover:border-[#CD091B]/30 transition-all duration-500 group-hover:shadow-2xl group-hover:shadow-[#CD091B]/20">
                   
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e1a] via-[#0a0e1a]/70 to-transparent"></div>
-
-                  <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 md:p-6 lg:p-8">
-                    <span className="inline-block px-3 py-1.5 sm:px-4 sm:py-2 bg-red-500/20 border border-red-500/50 text-red-400 text-[10px] sm:text-xs md:text-sm font-bold uppercase rounded-lg mb-3 sm:mb-4">
-                      {item.category}
-                    </span>
-                    
-                    <div 
-                      className="text-white font-bold text-sm sm:text-base md:text-lg lg:text-xl uppercase leading-tight mb-3 sm:mb-4 line-clamp-3"
-                      dangerouslySetInnerHTML={{ __html: item.title }}
+                  {/* Image Section - Top Half */}
+                  <div className="relative h-3/5 overflow-hidden">
+                    <img
+                      src={item.img}
+                      alt={item.title}
+                      loading="lazy"
+                      className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
+                      style={{ filter: 'brightness(0.8)' }}
                     />
+                    <div className="absolute inset-0 bg-[#101631]/40"></div>
                     
-                    <div className="h-1 bg-gradient-to-r from-red-500 to-red-600 w-8 sm:w-10 md:w-12 rounded-full mb-3 sm:mb-4"></div>
+                    {/* Category Badge on Image */}
+                    <div className="absolute top-5 left-5">
+                      <div className="flex items-center gap-2 px-4 py-2 bg-[#CD091B]/90 backdrop-blur-sm rounded-lg">
+                        <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
+                        </svg>
+                        <span className="text-white text-xs sm:text-sm font-bold uppercase tracking-wider">
+                          {item.category}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Content Section - Bottom Half */}
+                  <div className="relative h-2/5 p-6 sm:p-8 flex flex-col justify-between bg-[#0a0e1a]">
                     
+                    {/* Title */}
+                    <div>
+                      <h3 
+                        className="text-white font-bold text-lg sm:text-xl md:text-2xl leading-tight line-clamp-2 mb-4"
+                        dangerouslySetInnerHTML={{ __html: item.title }}
+                      />
+                      
+                      {/* Decorative Line */}
+                      <div className="h-1 w-16 bg-[#CD091B] rounded-full mb-4"></div>
+                    </div>
+                    
+                    {/* Button */}
                     <a 
                       href={item.url} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 sm:gap-2 bg-gradient-to-r from-red-600 to-red-700 text-white text-xs sm:text-sm font-bold py-2 sm:py-2.5 md:py-3 px-4 sm:px-6 md:px-8 rounded-lg sm:rounded-xl hover:shadow-lg hover:shadow-red-500/30 transition-all"
+                      className="inline-flex items-center justify-between w-full bg-[#CD091B] hover:bg-[#a5070f] text-white font-semibold text-sm sm:text-base py-4 px-6 rounded-xl border border-[#CD091B] hover:border-[#a5070f] transition-all duration-300 group/btn shadow-lg hover:shadow-xl"
                     >
-                      <span>View Details</span>
-                      <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      <span className="tracking-wide">View Details</span>
+                      <svg className="w-5 h-5 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                       </svg>
                     </a>
                   </div>
@@ -267,6 +414,12 @@ const EngineeringTabsSlider = () => {
         .scrollbar-hide::-webkit-scrollbar {
           display: none;
         }
+        .line-clamp-2 {
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
       `}</style>
     </div>
   );
@@ -274,7 +427,7 @@ const EngineeringTabsSlider = () => {
 
 const PowerStructureSVG = () => (
   <>
-    {/* Transmission Tower - Top Right */}
+  {/* Transmission Tower - Top Right */}
     <svg className="absolute top-4 sm:top-6 md:top-10 right-4 sm:right-6 md:right-10 w-20 h-32 sm:w-28 sm:h-40 md:w-36 md:h-52 lg:w-48 lg:h-64 opacity-[0.04]" viewBox="0 0 200 300" fill="none">
       <path d="M100 20 L100 280 M70 80 L130 80 M60 120 L140 120 M50 160 L150 160 M40 200 L160 200 M30 240 L170 240 M70 80 L40 200 M130 80 L160 200 M40 200 L30 240 M160 200 L170 240" 
         stroke="#3b82f6" strokeWidth="4"/>

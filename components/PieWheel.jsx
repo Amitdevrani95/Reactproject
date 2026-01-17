@@ -6,7 +6,7 @@ const sections = [
   {
     tabTitle: "Systems and Approach",
     contentTitle: "Systems Approach and Foresight",
-    image: "https://sanpec-excellence.com/wp-content/uploads/2025/02/Rectangle-3-copy-8-3.png",
+    image: "images/home/six-pillars/1.png",
     content: [
       {
         subtitle: "Visionary Leadership:",
@@ -29,7 +29,7 @@ const sections = [
   {
     tabTitle: "Agility",
     contentTitle: "Agility and Strategic Planning",
-    image: "https://sanpec-excellence.com/wp-content/uploads/2025/01/Rectangle-3-copy-9.png",
+    image: "images/home/six-pillars/2.png",
     content: [
       {
         subtitle: "Adaptation and Flexibility in Operations:",
@@ -53,7 +53,7 @@ const sections = [
   {
     tabTitle: "New Innovation",
     contentTitle: "New Solutions and Innovation Management",
-    image: "https://sanpec-excellence.com/wp-content/uploads/2025/01/Rectangle-3-copy-10.png",
+    image: "images/home/six-pillars/3.png",
     content: [
       {
         subtitle: "Cutting-Edge Research and Development:",
@@ -76,7 +76,7 @@ const sections = [
   {
     tabTitle: "Process Excellence",
     contentTitle: "Process Excellence",
-    image: "https://sanpec-excellence.com/wp-content/uploads/2025/01/Rectangle-3-copy-11.png",
+    image: "images/home/six-pillars/4.png",
     content: [
       {
         subtitle: "Continuous Improvement in Business Processes:",
@@ -104,7 +104,7 @@ const sections = [
   {
     tabTitle: "Ecosystem Innovation",
     contentTitle: "Innovation within the Business Ecosystem",
-    image: "https://sanpec-excellence.com/wp-content/uploads/2025/01/Rectangle-3-copy-2-2-2.png",
+    image: "images/home/six-pillars/5.png",
     content: [
       {
         subtitle: "Innovation within the Business Ecosystem:",
@@ -128,7 +128,7 @@ const sections = [
   {
     tabTitle: "Collaboration & Co-Creation",
     contentTitle: "Collaborative Efforts for Shared Value",
-    image: "https://sanpec-excellence.com/wp-content/uploads/2025/01/Rectangle-3-copy-3-4.png",
+    image: "images/home/six-pillars/6.png",
     content: [
       {
         subtitle: "Collaborative Efforts for Shared Value:",
@@ -319,7 +319,7 @@ export default function InteractivePieWheel() {
           </div>
           
           {/* Description - Simplified on mobile */}
-          <div className="max-w-4xl mx-auto mt-6 lg:mt-10">
+          {/* <div className="max-w-4xl mx-auto mt-6 lg:mt-10">
             <div className="relative bg-white border border-gray-200 rounded-xl lg:rounded-2xl p-4 lg:p-8 shadow-md lg:shadow-lg hover:shadow-lg lg:hover:shadow-xl transition-shadow duration-300">
               {!isMobile && (
                 <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
@@ -347,7 +347,7 @@ export default function InteractivePieWheel() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Main Content Area - Mobile: Stack vertically, Desktop: Side by side */}

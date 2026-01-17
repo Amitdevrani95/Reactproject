@@ -420,13 +420,17 @@ export default function SanpecHeader() {
                     </button>
                   ))}
                 </div>
-
+                {/* sub menu */}
                 <div className="flex-1">
                   <div className="grid grid-cols-2 gap-4">
                     {currentTab?.items.map((item, idx) => (
                       <Link
                         key={idx}
-                        href={item.link}
+                        href={
+                      item.hash
+                        ? { pathname: item.link, hash: item.hash }
+                        : item.link
+                    } 
                         className="group bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 hover:border-[#CD091B] hover:shadow-lg hover:shadow-[#CD091B]/20 transition-all overflow-hidden"
                       >
                         <img 
@@ -447,6 +451,7 @@ export default function SanpecHeader() {
                   </div>
                 </div>
               </div>
+              {/* end sub menu */}
             </div>
           </div>
         )}

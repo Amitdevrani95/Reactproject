@@ -7,7 +7,7 @@ const tabsData = [
     icon: "⚡",
     title: "ENGINEERING TYPE TESTING (HVAC/HVDC)",
     heading: "Engineering, Testing",
-    image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12",
+    image: "images/home/services/1.jpg",
     points: [
       "Transmission Line Engineering and Manufacturing of Steel Structures (Sustainability Approach)",
       "Structural Analysis, Design and Detailing of Steel Poles and Lattice Tower",
@@ -24,7 +24,7 @@ const tabsData = [
     icon: "🔍",
     title: "PLANT AUDIT VQA SOURCE INSPECTIONS (QA/QC)",
     heading: "Plant Audit, Inspections (QA/QC), ITP",
-    image: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122",
+    image: "images/home/services/2.jpg",
     points: [
       "Transmission Materials: Steel Pole, Lattice Towers, and Substation Support Structures",
       "Weld Inspections – NDT Technique",
@@ -40,7 +40,7 @@ const tabsData = [
     icon: "📊",
     title: "MATERIAL MGT PROJECT MGT",
     heading: "Material and Project Management",
-    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40",
+    image: "images/home/services/3.png",
     points: [
       "Develop detailed project schedule to meet the construction demands",
       "Assist in Vendor Selections/evaluations",
@@ -55,7 +55,7 @@ const tabsData = [
     icon: "🚚",
     title: "LOGISTICS CONSTRUCTION SUPPORT",
     heading: "Logistics and Construction support",
-    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d",
+    image: "images/home/services/4.jpg",
     points: [
       "Follow up logistics planning from vendors",
       "Perform inspection of material upon arrival at port and Yards",
@@ -69,7 +69,7 @@ const tabsData = [
     icon: "📰",
     title: "TECHNICAL PAPERS",
     heading: "Recent Publication of Technical Papers",
-    image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85",
+    image: "images/home/services/5.webp",
     points: [
       "Innovative solutions for placement of strain gauges on lattice towers- TSDOS-2022",
       "Consideration of Socio-Economic Values in Transmission Line Engineering- TSDOS-2021",
@@ -85,7 +85,7 @@ const tabsData = [
     icon: "🎯",
     title: "OUR COMMITMENTS",
     heading: "OUR COMMITMENTS",
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978",
+    image: "images/home/services/6.jpg",
     points: [
       "Reliability and Resiliency based Design for Transmission Structures with Engineering Excellence",
       "Innovative and Cost-Effective solutions",
